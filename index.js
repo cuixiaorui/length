@@ -13,44 +13,56 @@ export class Length {
     return this.unit;
   }
 
-  isYard(unit){
-      return unit === YARD;
+  isYard(unit) {
+    return unit === YARD;
   }
 
-  isFoot(unit){
-      return unit === FOOT;
+  isFoot(unit) {
+    return unit === FOOT;
   }
 
-  isInch(unit){
-      return unit === INCH;
+  isInch(unit) {
+    return unit === INCH;
+  }
+
+  parseYard(u) {
+    if (this.isFoot(u)) {
+      return new Length(this.value * 3, u);
+    } else if (this.isInch(u)) {
+      return new Length(this.value * 36, u);
+    }
+    return this;
+  }
+
+  parseInch(u) {
+    if (this.isYard(u)) {
+      return new Length(this.value / 36, u);
+    } else if (this.isFoot(u)) {
+      return new Length(this.value / 12, u);
+    }
+    return this;
+  }
+
+  parseFoot(u) {
+    if (this.isYard(u)) {
+      return new Length(this.value / 3, u);
+    } else if (this.isInch(u)) {
+      return new Length(this.value * 12, u);
+    }
+    return this;
   }
 
   parseTo(u) {
-    let len = this;
     if (this.isYard(this.unit)) {
-      if (this.isFoot(u)) {
-        len = new Length(this.value * 3, u);
-      } else if (this.isInch(u)) {
-        len = new Length(this.value * 36, u);
-      }
+      return this.parseYard(u);
     }
 
     if (this.isInch(this.unit)) {
-      if (this.isYard(u)) {
-        len = new Length(this.value / 36, u);
-      } else if (this.isFoot(u)) {
-        len = new Length(this.value / 12, u);
-      }
+      return this.parseInch(u);
     }
 
     if (this.isFoot(this.unit)) {
-      if (this.isYard(u)) {
-        len = new Length(this.value / 3, u);
-      } else if (this.isInch(u)) {
-        len = new Length(this.value * 12, u);
-      }
+      return this.parseFoot(u);
     }
-
-    return len;
   }
 }
