@@ -1,15 +1,19 @@
 import { YARD, FOOT, INCH } from "./consts";
 export class Length {
-  constructor(val, uint) {
+  constructor(val, unit) {
     this.value = val;
-    this.unit = uint;
+    this.unit = unit;
+  }
+
+  equal(length){
+    return this.value === length.getVal() && this.unit === length.getUnit();
   }
 
   getVal() {
     return this.value;
   }
 
-  getUint() {
+  getUnit() {
     return this.unit;
   }
 

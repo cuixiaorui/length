@@ -39,8 +39,8 @@ describe("Length", () => {
   test("如果没有对应的转换单位应该返回当前单位", () => {
     const val = 1;
     const unit = YARD;
-    const length = new Length(1, YARD).parseTo("mi");
-    expect(length.getVal()).toBe(val);
-    expect(length.getUint()).toBe(unit);
+    const length = new Length(val,unit);
+    const newLength = length.parseTo("mi");
+    expect(length.equal(newLength)).toBeTruthy()
   });
 });
