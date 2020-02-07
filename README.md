@@ -420,6 +420,7 @@ yarn test
 > vscode 开发
 
 ![](https://user-gold-cdn.xitu.io/2020/2/5/17013a391a9cf39e?w=818&h=634&f=jpeg&s=80679)
+
 可以看到红圈部分提示可以替换所有（指的是 index.js ）文件
 
 我们点击，替换 index.js 所有的 'yard'
